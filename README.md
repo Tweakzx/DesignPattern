@@ -1,4 +1,4 @@
-# DesignPattern
+# 设计模式
 
 |  类型  | 序号 | 设计模型     | 代码                                   | 常用 | 简介                                                                                                     | 别名               |
 | :----: | ---- | ------------ | -------------------------------------- | ---- | -------------------------------------------------------------------------------------------------------- | ------------------ |
@@ -25,3 +25,86 @@
 |        | 21   | 命令模式     | [command](./command/)                  |      | 将请求封装成一个对象，从而可以将请求参数化、队列化、记录日志等操作                                       | 动作               |
 |        | 22   | 解释器模式   | [interpreter](./interpreter/)          |      | 给定一个语言，定义它的文法的一种表示，并定义一个解释器，使用该解释器来解释语言中的句子                   | 语法分析器         |
 |        | 23   | 中介模式     | [mediator](./mediator/)                |      | 通过引入一个中介者对象，来协调和控制对象之间的交互，从而避免对象之间的紧耦合                             | 调停者             |
+
+# 设计模式之间的关系
+
+```mermaid
+graph LR
+    FactoryMethod(Factory Method)
+    AbstractFactory(Abstract Factory)
+    Prototype(Prototype)
+    Singleton(Singleton)
+    Iterator(Iterator)
+    Visitor(Visitor)
+    ChainOfResponsibility(Chain of Responsibility)
+    Command(Command)
+    Memento(Memento)
+    Mediator(Mediator)
+    Observer(Observer)
+    State(State)
+    Strategy(Strategy)
+    TemplateMethod(Template Method)
+    Composite(Composite)
+    Decorator(Decorator)
+    Adapter(Adapter)
+    Bridge(Bridge)
+    Proxy(Proxy)
+    Flyweight(Flyweight)
+    Interpreter(Interpreter)
+    Facade(Facade)
+
+    Adapter 
+    Bridge
+    Proxy
+
+    FactoryMethod -. 用工厂方法实现 .-> AbstractFactory
+    AbstractFactory -. 动态配置工厂 .-> Prototype
+    AbstractFactory -. 单个实例 .-> Singleton
+
+    Command -. 避免滞后 .-> Memento
+    Command -. 使用组合命令 .-> Composite
+
+    ChainOfResponsibility -. 定义链 .-> Composite
+
+    Composite -. 创建组合 .-> Builder
+    Composite -. 给对象增加职责 .-> Decorator
+    Composite -. 共享组合 .-> Flyweight
+    Composite -. 枚举子女 .-> Iterator
+    Composite -. 增加操作 .-> Visitor
+  
+    Visitor -. 定义遍历 .-> Iterator
+
+    Strategy -. 共享策略 .-> Flyweight
+    Strategy -. 改变外表 .-> Decorator
+    Decorator -. 改变内容 .-> Strategy
+
+    State -. 共享状态.-> Flyweight
+
+    Interpreter -. 定义语法 .-> Composite
+    Interpreter -. 增加操作 .-> Visitor
+    Interpreter -. 共享终结符 .-> Flyweight
+
+    Facade -. 单个实例 .-> Singleton
+
+    Iterator -. 保存迭代状态 .-> Memento
+
+    TemplateMethod -. 经常使用 .-> FactoryMethod
+    TemplateMethod -. 定义算法步骤 .-> Strategy
+
+    Observer -. 对复杂依赖关系的处理 .-> Mediator
+
+
+
+```
+
+# 设计原则
+
+| 序号 | 原则                                                    | 内涵                                                            | 备注 |              |
+| ---- | ------------------------------------------------------- | --------------------------------------------------------------- | ---- | ------------ |
+| 1    | 单一职责原则（Single Responsibility Principle）         | 一个类只负责一项职责                                            | SRP  |              |
+| 2    | 开闭原则（Open Closed Principle）                       | 对扩展开放,对修改关闭                                           | OCP  |              |
+| 3    | 里氏替换原则（Liskov Substitution Principle）           | 任何基类可以出现的地方,子类一定可以出现                         | LSP  |              |
+| 4    | 迪米特法则（Law of Demeter）                            | 一个实体应当尽量少的与其它实体发生相互作用,使得功能模块相互独立 | LOD  | 最少知识法则 |
+| 5    | 接口隔离原则（Interface Segregation Principle）         | 使用多个隔离的接口,比使用单个接口要好,降低类之间的耦合度        | ISP  |              |
+| 6    | 依赖倒置原则（Dependence Inversion Principle）          | 针对接口编程,依赖于抽象而不依赖于具体                           | DIP  |              |
+| 7    | 合成聚合复用原则（Composite/Aggregate Reuse Principle） | 尽量使用合成/聚合的方式,而不是使用继承                          | CARP |              |
